@@ -67,35 +67,19 @@
 		}
 	</style>
 	<script src="jquery.min.js"></script>
-	<!-- 引入 SDK 和配置项 js -->
+	<script charset='UTF-8' src="https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.15/sensorsdata.min.js"></script>
 	<script>
-		(function(para) {
-			var p = para.sdk_url, n = para.name, w = window, d = document, s = 'script',x = null,y = null;
-			if(typeof(w['sensorsDataAnalytic201505']) !== 'undefined') {
-				return false;
-			}
-			w['sensorsDataAnalytic201505'] = n;
-			w[n] = w[n] || function(a) {return function() {(w[n]._q = w[n]._q || []).push([a, arguments]);}};
-			var ifs = ['track','quick','register','registerPage','registerOnce','trackSignup', 'trackAbtest', 'setProfile','setOnceProfile','appendProfile', 'incrementProfile', 'deleteProfile', 'unsetProfile', 'identify','login','logout','trackLink','clearAllRegister','getAppStatus'];
-			for (var i = 0; i < ifs.length; i++) {
-			w[n][ifs[i]] = w[n].call(null, ifs[i]);
-			}
-			if (!w[n]._t) {
-			x = d.createElement(s), y = d.getElementsByTagName(s)[0];
-			x.async = 1;
-			x.src = p;
-			x.setAttribute('charset','UTF-8');
-			w[n].para = para;
-			y.parentNode.insertBefore(x, y);
-			}
-		})({
-			sdk_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.17/sensorsdata.min.js',
-    		server_url: 'http://10.120.195.209:8106/sa?project=beiyong3&token=d9f7cf9e108a2a592ccbe7c2c397c3ea2ed0834885306df488ecd2a9435a3d90',// 备用环境3
-			// sdk_url: 'https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.17/sensorsdata.min.js',
-    		// server_url: 'http://10.120.46.111:8106/sa?project=xecs',
-			name: 'sensors',
-			heatmap:{},
+		var sensors = window['sensorsDataAnalytic201505'];
+		sensors.init({
+			server_url: 'http://10.120.46.111:8106/sa?project=xecs'    
 		});
+		// 这个插件的使用必须要在 pv 的前面;如果在后面初始化的话 pv 中的distinct_id 就不对了
+		sensors.quick('useModulePlugin', 'SiteLinker',{
+			linker:[
+				{part_url:'github.io',after_hash: false},
+				{part_url:'baidu.com',after_hash: false}
+			]
+		})
 		sensors.quick('autoTrack');
 	</script>
 </head>
