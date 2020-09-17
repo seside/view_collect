@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
+	/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>多域名打通</title>
+	<style>
+		/* $WebStay必须是要绑定在 html/window 上，否则是不生效的。 */
+		html{
+			height: 100%;
+			width: 100%; 
+		}
+		body{
+			width: 100%;
+			height: 100%;
+			/* overflow: auto;
+			border: 1px solid red; */
+		}
+		#wrap {
+			padding:10px 0;
+			/* width: 100%;
+			height: 100%;
+			overflow-y: auto; */
+		}
+		.area_line{
+			padding:20px;
+			border: 1px solid #666;
+		}
+		.margin_t10{
+			margin-top: 10px;
+		}
+		.red{
+			color: red;
+		}
+		.main-color{
+			color: #04bd88;
+		}
+		.main-btn{
+			width: 500px;
+			padding:10px;
+			color: #fff;
+			background: #04bd88;
+			text-align: center;
+			border-radius: 5px;
+		}
+		.input_style{
+			width: 300px;
+			height: 30px;
+			padding:5px;
+			border: 1px solid #04bd88;
+			outline: none;
+		}
+		.textarea_style{
+			border: 1px solid #04bd88;
+			padding: 5px;
+			outline: none;
+		}
+		button{
+			border: none;
+			outline: none;
+		}
+		a{
+			text-decoration: none;
+			color: #04bd88;
+		}
+	</style>
+	<script src="jquery.min.js"></script>
+	<script charset='UTF-8' src="https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.15/sensorsdata.min.js"></script>
+	<script>
+		var sensors = window['sensorsDataAnalytic201505'];
+		sensors.init({
+			server_url: 'http://10.120.46.111:8106/sa?project=xecs'    
+		});
+		// 这个插件的使用必须要在 pv 的前面;如果在后面初始化的话 pv 中的distinct_id 就不对了
+		sensors.quick('useModulePlugin', 'SiteLinker',{
+			linker:[
+				{part_url:'mhb.com',after_hash: false},
+			]
+		})
+		sensors.quick('autoTrack');
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<header></header>
+		<section>
+			<div class="area_line margin_t10">
+				<h3 class="main-color">Mhb 可视化全埋点测试</h3>
+				<div id="test1" class="margin_t10 main-btn">div-test</div>
+				<div>
+					<input id="input1" type="text" class="input_style margin_t10" placeholder="请输入您的姓名">
+				</div>
+				<div>
+					<input id="input2" type="number" class="input_style margin_t10" placeholder="请输入您的手机号">
+				</div>
+
+				<div>
+					<textarea name="" placeholder="请输入内容" class="margin_t10 textarea_style" id="" cols="30" rows="10"></textarea>
+				</div>
+			</div>
+
+			<div class="area_line margin_t10">
+				<h3 class="main-color">button-a</h3>
+				<button class="margin_t10 main-btn">button-test</button>
+				<a href="javascript:void(0);">a-test</a>
+			</div>
+		</section>
+	</div>
+</body>
+<script type="text/javascript">
+	// $('#test1').on('click',function(){
+	// 	sensors.track('mhbtrack',{
+	// 		'name': 'mhb',
+	// 	})
+	// })
+</script>
+
+</html>
