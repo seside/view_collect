@@ -72,14 +72,14 @@
 	<script>
 		var sensors = window['sensorsDataAnalytic201505'];
 		sensors.init({
-			server_url: 'https://sf21-test.debugbox.sensorsdata.cn:4006/',
+			server_url: 'http://10.120.4.106:8106/sa?project=default',
 			heatmap:{}
 		});
 		// 初始化弹窗插件
 		sensors.quick('setPlugin',{
 			popup: function(popup){
 				popup.init({
-					api_base_url:''
+					api_base_url:'https://apimapping.debugbox.sensorsdata.cn/debugbox/sfo21-test/8201/api/v2'
 				})
 			}
 		})
