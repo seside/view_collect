@@ -67,17 +67,21 @@
 		}
 	</style>
 	<script src="jquery.min.js"></script>
+	<script src="popup.min.js"></script>
 	<script charset='UTF-8' src="https://cdn.jsdelivr.net/npm/sa-sdk-javascript@1.15.15/sensorsdata.min.js"></script>
 	<script>
 		var sensors = window['sensorsDataAnalytic201505'];
 		sensors.init({
-			server_url: 'http://10.120.46.111:8106/sa?project=xecs'    
+			server_url: 'https://sf21-test.debugbox.sensorsdata.cn:4006/',
+			heatmap:{}
 		});
-		// 这个插件的使用必须要在 pv 的前面;如果在后面初始化的话 pv 中的distinct_id 就不对了
-		sensors.quick('useModulePlugin', 'SiteLinker',{
-			linker:[
-				{part_url:'mhb.com',after_hash: false},
-			]
+		// 初始化弹窗插件
+		sensors.quick('setPlugin',{
+			popup: function(popup){
+				popup.init({
+					api_base_url:''
+				})
+			}
 		})
 		sensors.quick('autoTrack');
 	</script>
